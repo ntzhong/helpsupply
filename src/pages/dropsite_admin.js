@@ -1,14 +1,9 @@
 /** @jsx jsx */
 import React from 'react';
+import Page from 'components/layouts/Page';
 import { jsx } from '@emotion/core';
 import { withRouter } from 'react-router-dom';
-
-import { Emails } from 'constants/Emails';
-import { Routes } from 'constants/Routes';
-import { routeWithParams } from 'lib/utils/routes';
-
-import Page from 'components/layouts/Page';
-import DropSiteAdmin from 'components/DropSiteAdmin';
+import DropSiteAdminContainer from 'containers/DropSiteAdmin';
 
 class AdminDropSite extends React.Component {
   constructor(props) {
@@ -25,11 +20,8 @@ class AdminDropSite extends React.Component {
     if (!this.props.backend.isLoggedIn()) {
       console.log(this.props.backend.authLoaded);
       if (this.props.backend.authLoaded) {
-        this.props.history.push(
-          routeWithParams(Routes.DROPSITE_DETAIL, {
-            id: this.props.match.params.id,
-          }),
-        );
+        let url = '/dropsite/' + this.props.match.params.id;
+        this.props.history.push(url);
         return;
       } else {
         setTimeout(this.checkVerification, 100);
@@ -59,31 +51,22 @@ class AdminDropSite extends React.Component {
     this.props.backend.getRequests(this.props.match.params.id).then((data) => {
       this.setState(
         {
-          needs: data,
+          requests: data,
         },
         () => {},
-      );
-    });
-    this.props.backend.listSupply(this.props.match.params.id).then((data) => {
-      this.setState(
-        {
-          supply: data,
-        },
-        () => {
-          // console.log(this.state);
-        },
       );
     });
     this.props.backend.getDropSites(this.props.match.params.id).then((data) => {
       this.setState(
         {
+          dropSiteAddress: data?.dropSiteAddress,
+          dropSiteDescription: data?.dropSiteDescription,
+          dropSiteFacilityName: data?.dropSiteFacilityName,
           dropSiteId: data?.location_id,
           dropSiteName: data?.dropSiteName,
-          dropSiteAddress: data?.dropSiteAddress,
-          dropSiteZip: data?.dropSiteZip,
-          dropSiteDescription: data?.dropSiteDescription,
-          dropSiteHospital: data?.dropSiteHospital,
           dropSitePhone: data?.dropSitePhone,
+          dropSiteRequirements: data?.dropSiteRequirements,
+          dropSiteZip: data?.dropSiteZip,
         },
         () => {},
       );
@@ -94,7 +77,15 @@ class AdminDropSite extends React.Component {
 
   render() {
     let content = (
-      <DropSiteAdmin backend={this.props.backend} {...this.state} />
+      <DropSiteAdminContainer
+        address={this.state.dropSiteAddress}
+        backend={this.props.backend}
+        description={this.state.dropSiteDescription}
+        facilityName={this.state.dropSiteFacilityName}
+        name={this.state.dropSiteName}
+        phone={this.state.dropSitePhone}
+        {...this.state}
+      />
     );
 
     if (this.state.loading) {
@@ -117,7 +108,7 @@ class AdminDropSite extends React.Component {
           <div className="alertText">
             Your email doesn't look like it's from a healthcare provider. Please{' '}
             <a
-              href={Routes.LOGOUT}
+              href="/logout"
               style={{
                 color: '#721c24',
                 fontWeight: 'bold',
@@ -126,8 +117,7 @@ class AdminDropSite extends React.Component {
             >
               log out
             </a>{' '}
-            and try your work email or contact{' '}
-            <a href={`mailto:${Emails.HELP}`}>{Emails.HELP}</a>.
+            and try your work email or contact help@help.supply.
           </div>
         </div>
       );

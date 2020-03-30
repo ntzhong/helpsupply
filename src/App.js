@@ -13,12 +13,12 @@ import Request from 'pages/request';
 import SignUp from 'pages/signup';
 
 import HCPSignupFinish from './components/HCPSignupFinish';
-import DropSite from './components/DropSite';
 import PendingDomains from './components/PendingDomains';
 import NoMatch from './components/NoMatch';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Profile from './components/Profile';
+import DropSite from './components/DropSite';
 import StyleGuide from './components/StyleGuide/index';
 
 import { styles } from './App.styles';

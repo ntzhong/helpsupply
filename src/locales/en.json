@@ -2,6 +2,8 @@
   "translations": {
     "generic.form.submitLabel": "Submit",
     "generic.form.submitLabelNext": "Next",
+    "generic.button.deleteLabel": "Delete",
+    "generic.label.added": "Added",
     "home.intro.learnMore": "Learn more",
     "home.intro.paragraph1": "Our platform gives a real-time view of the immediate needs of healthcare workers. We provide this information to the organizations of paid workers and volunteers that are ready and able to help.",
     "home.intro.paragraph2": "Want to know more about who we’re working with, or have supplies or services you want to donate?",
@@ -53,6 +55,10 @@
     "request.workEmailForm.sent.description": "We just sent you an email with a link to verify your email. It should arrive within a couple minutes.",
     "request.workEmailForm.title": "Enter your work email address",
     "request.workEmailForm.workEmail.disclaimer": "Note: we will never share your email address with any other parties.",
-    "request.workEmailForm.workEmail.label": "Work email"
+    "request.workEmailForm.workEmail.label": "Work email",
+    "dropsite.requestSuppliesButton.label": "Request supplies",
+    "dropsite.openRequests.title": "Open requests",
+    "dropsite.openRequests.requestId": "Request ID",
+    "dropsite.footer.content": "If you have recommendations for improving this tool, please email us at"
   }
 }
